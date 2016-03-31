@@ -25,14 +25,14 @@ class MailMessage < ActiveRecord::Base
   # rendered template are stored into parsed_subject
   def parse_subject(attrs = {})
     self.parsed_subject = subject_template.render(
-      attrs, strict_variables: true)
+      attrs.deep_stringify_keys, strict_variables: true)
   end
 
   # parse body_template with given attributes
   # rendered template are stored into parsed_body
   def parse_body(attrs = {})
     self.parsed_body = body_template.render(
-      attrs, strict_variables: true)
+      attrs.deep_stringify_keys, strict_variables: true)
   end
 
   # subject template over template parser

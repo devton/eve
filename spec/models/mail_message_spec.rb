@@ -3,17 +3,24 @@ require 'rails_helper'
 RSpec.describe MailMessage, type: :model do
   let(:mail_message) do
     create(:mail_message, {
-        subject: 'welcome {{name}}',
-        body: 'hello {{name}}'
+        subject: 'welcome {{user.name}}',
+        body: 'hello {{user.name}} more nested {{user.address.street}}'
       })
   end
   let(:parse_attrs) do
     {
       subject_data: {
-        'name' => 'ipsum'
+        user: {
+          name: 'ipsum'
+        }
       },
       body_data: {
-        'name' => 'lorem'
+        user: {
+          name: 'lorem',
+          address: {
+            street: 'foo bar'
+          }
+        }
       }
     }
   end
@@ -72,7 +79,7 @@ RSpec.describe MailMessage, type: :model do
       end
 
       it 'should parsed_body filled' do
-        expect(mail_message.parsed_body).to eq('hello lorem')
+        expect(mail_message.parsed_body).to eq('hello lorem more nested foo bar')
       end
 
       it 'should have no errors' do
@@ -86,7 +93,7 @@ RSpec.describe MailMessage, type: :model do
       end
 
       it 'should parsed_subject filled' do
-        expect(mail_message.parsed_body).to eq('hello ')
+        expect(mail_message.parsed_body).to eq('hello  more nested ')
       end
 
       it 'should have no errors' do
