@@ -61,6 +61,7 @@ GEM
       multi_json (~> 1.2)
     json (1.8.3)
     key_struct (0.4.2)
+    liquid (4.0.0.rc2)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
     mail (2.6.4)
@@ -219,6 +220,7 @@ DEPENDENCIES
   database_cleaner
   factory_girl_rails
   jbuilder (~> 2.0)
+  liquid (~> 4.0.0.rc2)
   pg (~> 0.15)
   rails (= 4.2.6)
   rspec-rails (~> 3.0)
