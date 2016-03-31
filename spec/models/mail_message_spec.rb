@@ -32,6 +32,18 @@ RSpec.describe MailMessage, type: :model do
     it { should validate_presence_of(:body) }
     it { should validate_presence_of(:label) }
     it { should validate_uniqueness_of(:label) }
+    it do
+      should allow_values(
+        'label_name', 'lname', 'lname12_ln1'
+      ).for(:label)
+    end
+
+    it do
+      should_not allow_value(
+        'Label Name', 'LABEL_NAME', 'Label'
+      ).for(:label)
+    end
+
   end
 
   describe '.parse' do

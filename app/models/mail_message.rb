@@ -1,7 +1,7 @@
 # MailMessage handles with a email messages
 # that can be delivered via events
 class MailMessage < ActiveRecord::Base
-  validates :label, uniqueness: true
+  validates :label, uniqueness: true, format: { with: /\A[a-z\_0-9]+\z/ }
   validates :label, :subject, :body, presence: true
 
   attr_accessor :parsed_subject, :parsed_body
