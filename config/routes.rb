@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  root to: 'dashboard#index'
+  get 'dashboard' => 'dashboard#index'
+
   devise_for :users
   namespace :api, constraints: { format: 'json' } do
     post 'incoming_events' => 'incoming_events#create'

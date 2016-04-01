@@ -1,5 +1,6 @@
 # This controller handles with incoming events  via api
 class Api::IncomingEventsController < ApplicationController
+  skip_before_filter :authenticate_user!
   protect_from_forgery with: :null_session
   respond_to :json
 
