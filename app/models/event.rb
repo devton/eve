@@ -1,5 +1,6 @@
 class Event < ActiveRecord::Base
   belongs_to :event_trigger
+  has_many :executed_actions, class_name: 'EventExecutedAction'
 
   validates :event_trigger, :metadata, presence: true
   validate :validate_metadata_format, if: -> (x) { x.metadata.present? }
