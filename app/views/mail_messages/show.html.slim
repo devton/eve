@@ -1,0 +1,11 @@
+.mui-container-fluid
+  h1= @mail_message.label
+  br/
+  strong subject template
+  br/
+  = @mail_message.subject
+  br/
+  br/
+  strong body template
+  br/
+  = simple_format(@mail_message.body)

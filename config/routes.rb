@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+
+  resources :mail_messages do
+    get :remove, on: :member
+  end
+
   root to: 'dashboard#index'
   get 'dashboard' => 'dashboard#index'
 

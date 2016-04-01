@@ -1,0 +1,13 @@
+.mui-container-fluid
+  .mui-row
+    .mui-col-xs-6
+      h1 Email templates
+    .mui-col-xs-6
+      .mui--pull-right
+        = paginate @mail_messages
+  - @mail_messages.each do |resource|
+    .mui-row
+      .mui-panel.without-margin
+        span= link_to resource.label, edit_mail_message_path(resource)
+
+  = paginate @mail_messages

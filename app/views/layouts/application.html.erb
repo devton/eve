@@ -12,7 +12,7 @@
     <body>
 
         <%- if controller_name != 'devise' %>
-            <div id="sidedrawer" class="mui--no-user-select">
+            <div id="sidedrawer" class="mui--no-user-select mui--z1">
                 <%= render 'shared/main_sidebar' %>
             </div>
             <header id="header">
@@ -25,12 +25,9 @@
                 </div>
             </header>
             <div id="content-wrapper">
+                <div class="mui--appbar-height"></div>
                 <%= yield %>
             </div>
-            <footer id="footer">
-                <div class="mui-container-fluid">
-                </div>
-            </footer>
         <%- else %>
             <%= yield %>
         <%- end %>

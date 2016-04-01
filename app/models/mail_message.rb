@@ -1,6 +1,8 @@
 # MailMessage handles with a email messages
 # that can be delivered via events
 class MailMessage < ActiveRecord::Base
+  paginates_per 20
+  max_paginates_per 100
   validates :label, uniqueness: true, format: { with: /\A[a-z\_0-9]+\z/ }
   validates :label, :subject, :body, presence: true
 
