@@ -41,8 +41,14 @@ RSpec.describe Api::IncomingEventsController, type: :controller do
       expect(response).to have_http_status(:not_found)
     end
 
-    it 'returns http bad_request when missing some required attribute' do
+    it 'returns http bad_request when invalid key' do
       post_body.update(key: 'lorem')
+      post :create, post_body, format: :json
+      expect(response).to have_http_status(:bad_request)
+    end
+
+    it 'return http bad_request when invalid hash' do
+      post_body.update(event_hash: 'loremameonri')
       post :create, post_body, format: :json
       expect(response).to have_http_status(:bad_request)
     end

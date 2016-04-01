@@ -2,6 +2,20 @@
 class Api::IncomingEventsController < ApplicationController
   respond_to :json
 
+  # Handles with creation of events
+  # Request body in json format:
+  # {
+  #   trigger_name: 'tr_name',
+  #   to: 'to@email.com',
+  #   from: 'from@email.com',
+  #   reply_to: 'reply@email.com',
+  #   subject_data: { user: { name: 'foor' } },
+  #   body_data: { user: { name: 'foor' } },
+  #   extra_data: {}
+  # }
+  # should be ecrypted over ApiKey public key an passed in request
+  # body like:
+  # { key: ApiKey.key, event_hash: ApiKey.encode_message('message') }
   def create
     unless api_key.present?
       return render json: { error: 'invalid key' }, status: :bad_request
@@ -22,6 +36,8 @@ class Api::IncomingEventsController < ApplicationController
     else
       render json: { errors: event.errors }, status: :bad_request
     end
+  rescue OpenSSL::PKey::RSAError
+    render json: { error: 'invalid hash' }, status: :bad_request
   end
 
   def trigger
