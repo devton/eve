@@ -7,6 +7,7 @@ class EventTriggersController < ApplicationController
 
   def show
     @event_trigger = EventTrigger.find params[:id]
+    @event_trigger.mail_actions.build unless @event_trigger.mail_actions.present?
     respond_with @event_trigger
   end
 
@@ -33,7 +34,11 @@ class EventTriggersController < ApplicationController
       flash[:notice] = 'event trigger updated'
       redirect_to @event_trigger
     else
-      render :edit
+      if event_trigger_params[:mail_actions_attributes].present?
+        render :show
+      else
+        render :edit
+      end
     end
   end
 
@@ -44,6 +49,6 @@ class EventTriggersController < ApplicationController
   end
 
   def event_trigger_params
-    params.require(:event_trigger).permit(:trigger_name, :description)
+    params.require(:event_trigger).permit(:trigger_name, :description, mail_actions_attributes: %i( mail_message_id event_trigger_id ))
   end
 end

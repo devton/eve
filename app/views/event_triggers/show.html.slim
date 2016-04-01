@@ -9,3 +9,10 @@
   strong description
   br/
   = simple_format(@event_trigger.description)
+
+  hr/
+  h2 Mail message to deliver when execute trigger
+  = simple_form_for @event_trigger do |f|
+    = f.simple_fields_for :mail_actions do |ma|
+      = ma.association :mail_message
+      = f.button :submit

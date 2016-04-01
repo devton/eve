@@ -8,6 +8,10 @@ class MailMessage < ActiveRecord::Base
 
   attr_accessor :parsed_subject, :parsed_body
 
+  def to_s
+    label
+  end
+
   # handles with template parse for message
   # attributes should be in format:
   # attrs = {
