@@ -11,6 +11,12 @@
  * file per style scope.
  *
  *= require_tree .
- *= require pure
+ *= require mui
  *= require_self
  */
+
+html,
+body {
+  height: 100%;
+  background-color: #eee;
+}
