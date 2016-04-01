@@ -28,6 +28,7 @@ gem 'json-schema'
 gem 'liquid', '~> 4.0.0.rc2'
 gem 'sidekiq'
 gem "slim-rails"
+gem 'responders', '~> 2.0'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
