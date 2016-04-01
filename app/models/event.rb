@@ -3,7 +3,8 @@ class Event < ActiveRecord::Base
   has_many :executed_actions, class_name: 'EventExecutedAction'
 
   serialize :metadata, HashSerializer
-  store_accessor :metadata, :to, :from, :reply_to
+  store_accessor :metadata, :to, :from, :reply_to,
+    :subject_data, :body_data, :extra_data, :trigger_name
 
   validates :event_trigger, :metadata, presence: true
   validate :validate_metadata_format, if: -> (x) { x.metadata.present? }
@@ -12,14 +13,15 @@ class Event < ActiveRecord::Base
   def self.metadata_schema
     {
       type: 'object',
-      required: %i(event_trigger to),
+      required: %i(trigger_name to),
       properties: {
-        event_trigger: { type: 'string' },
+        trigger_name: { type: 'string' },
         from: { type: 'string' },
         to: { type: 'string' },
         reply_to: { type: 'string' },
         subject_data: { type: 'object' },
-        body_data: { type: 'object' }
+        body_data: { type: 'object' },
+        extra_data: { type: 'object' }
       }
     }
   end

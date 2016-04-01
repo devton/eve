@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe EventsProcessJob, type: :job do
   let(:e_metadata) do
     {
-      event_trigger: event_trigger.trigger_name,
+      trigger_name: event_trigger.trigger_name,
       to: 'test@test.com',
       reply_to: 'r@test.com',
       from: 'f@test.com',

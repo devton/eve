@@ -3,7 +3,7 @@ FactoryGirl.define do
     event_trigger
     metadata do
       {
-        event_trigger: 'trigger',
+        trigger_name: 'trigger',
         to: 'example@email.com',
         from: 'system@example.com',
         reply_to: 'lorem@lorem.com',
