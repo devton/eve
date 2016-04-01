@@ -4,19 +4,17 @@ FactoryGirl.define do
     metadata do
       {
         event_trigger: 'trigger',
-        receiver_data: {
-          to: 'example@email.com',
-          from: 'system@example.com',
-          reply_to: 'lorem@lorem.com',
-          subject_data: {
-            user: {
-              name: 'Foo name'
-            }
-          },
-          body_data: {
-            user: {
-              name: 'Foo name'
-            }
+        to: 'example@email.com',
+        from: 'system@example.com',
+        reply_to: 'lorem@lorem.com',
+        subject_data: {
+          user: {
+            name: 'Foo name'
+          }
+        },
+        body_data: {
+          user: {
+            name: 'Foo name'
           }
         }
       }.to_json

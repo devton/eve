@@ -25,6 +25,7 @@ gem 'liquid', '~> 4.0.0.rc2'
 # gem 'capistrano-rails', group: :development
 
 gem 'schema_plus', '~> 2.0.1'
+gem 'json-schema'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

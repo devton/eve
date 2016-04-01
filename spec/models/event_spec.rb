@@ -9,5 +9,17 @@ RSpec.describe Event, type: :model do
     it { should validate_presence_of(:event_trigger) }
     it { should validate_presence_of(:metadata) }
     it { should belong_to(:event_trigger) }
+    it do
+      should allow_value({
+        event_trigger: 'foo_bar',
+        to: 'example@example.com'
+      }).for(:metadata)
+    end
+
+    it do
+      should_not allow_value({
+        event_trigger: 'foo_bar'
+      }, {}, {to: 'foo@foo.com'}).for(:metadata)
+    end
   end
 end
