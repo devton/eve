@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  resources :event_triggers do
+    get :remove, on: :member
+  end
+
   resources :mail_messages do
     get :remove, on: :member
   end

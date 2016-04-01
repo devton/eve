@@ -1,0 +1,11 @@
+.mui-container-fluid
+  h1= @event_trigger.trigger_name
+  br/
+  strong trigger name
+  br/
+  = @event_trigger.trigger_name
+  br/
+  br/
+  strong description
+  br/
+  = simple_format(@event_trigger.description)
