@@ -3,11 +3,18 @@ class Api::IncomingEventsController < ApplicationController
   respond_to :json
 
   def create
+    unless api_key.present?
+      return render json: { error: 'invalid key' }, status: :bad_request
+    end
+
     unless trigger.present?
       return render json: { error: 'trigger not fount' }, status: :not_found
     end
 
-    event = Event.create(event_params.merge(event_trigger: trigger))
+    event = Event.create(
+      event_trigger: trigger,
+      metadata: event_data
+    )
 
     if event.persisted?
       EventsProcessJob.perform_later(event.id)
@@ -18,17 +25,15 @@ class Api::IncomingEventsController < ApplicationController
   end
 
   def trigger
-    @trigger ||= EventTrigger.find_by_trigger_name(event_params[:trigger_name])
+    @trigger ||= EventTrigger.find_by_trigger_name(event_data[:trigger_name])
   end
 
-  def event_params
-    params.require(:event).permit(
-      :trigger_name,
-      :to, :from, :reply_to
-    ).tap do |w|
-      w[:subject_data] = params[:event][:subject_data]
-      w[:body_data] = params[:event][:body_data]
-      w[:extra_data] = params[:event][:extra_data]
-    end
+  def event_data
+    @event_data ||= ActiveSupport::JSON.decode(
+      api_key.decode_message(params[:event_hash])).deep_symbolize_keys!
+  end
+
+  def api_key
+    @api_key ||= ApiKey.find_by_key params[:key]
   end
 end
