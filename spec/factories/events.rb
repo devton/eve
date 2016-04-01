@@ -17,7 +17,7 @@ FactoryGirl.define do
             name: 'Foo name'
           }
         }
-      }.to_json
+      }
     end
   end
 
