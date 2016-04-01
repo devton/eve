@@ -5,6 +5,7 @@ class EventsProcessJob < ActiveJob::Base
   def perform(event_id)
     e = Event.find event_id
     e.event_trigger.mail_actions.each do |m|
+      MailActionNotifier.deliver(e, m).deliver_now
       e.executed_actions.create(
         event_trigger_mail_action: m)
     end
