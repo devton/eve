@@ -36,6 +36,7 @@ Shoulda::Matchers.configure do |config|
 end
 
 RSpec.configure do |config|
+  config.include ActiveJob::TestHelper, type: :job
   config.include FactoryGirl::Syntax::Methods
   config.before(:suite) do
     begin

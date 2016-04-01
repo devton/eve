@@ -117,6 +117,9 @@ GEM
     rake (11.1.2)
     rdoc (4.2.2)
       json (~> 1.4)
+    rspec-activejob (0.6.1)
+      activejob (>= 4.2)
+      rspec-mocks
     rspec-core (3.4.4)
       rspec-support (~> 3.4.0)
     rspec-expectations (3.4.0)
@@ -235,6 +238,7 @@ DEPENDENCIES
   pg (~> 0.15)
   pry
   rails (= 4.2.6)
+  rspec-activejob
   rspec-rails (~> 3.0)
   sass-rails (~> 5.0)
   schema_plus (~> 2.0.1)
