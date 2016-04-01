@@ -66,6 +66,10 @@ GEM
     json-schema (2.6.1)
       addressable (~> 2.3.8)
     key_struct (0.4.2)
+    launchy (2.4.3)
+      addressable (~> 2.3)
+    letter_opener (1.4.1)
+      launchy (~> 2.2)
     liquid (4.0.0.rc2)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
@@ -240,6 +244,7 @@ DEPENDENCIES
   factory_girl_rails
   jbuilder (~> 2.0)
   json-schema
+  letter_opener
   liquid (~> 4.0.0.rc2)
   pg (~> 0.15)
   pry

@@ -37,6 +37,7 @@ group :development, :test do
   gem 'database_cleaner'
   gem 'pry'
   gem 'rspec-activejob'
+  gem "letter_opener" 
 end
 
 group :development do
