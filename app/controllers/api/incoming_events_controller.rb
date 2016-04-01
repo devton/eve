@@ -1,10 +1,8 @@
+# This controller handles with incoming events  via api
 class Api::IncomingEventsController < ApplicationController
   respond_to :json
 
   def create
-    trigger = EventTrigger.find_by_trigger_name(
-      event_params[:trigger_name])
-
     unless trigger.present?
       return render json: { error: 'trigger not fount' }, status: :not_found
     end
@@ -13,10 +11,14 @@ class Api::IncomingEventsController < ApplicationController
 
     if event.persisted?
       EventsProcessJob.perform_later(event.id)
-      render json: event.to_json, status: :created
+      render json: event, status: :created
     else
-      render json: { errors: event.errors.to_json }, status: :bad_request
+      render json: { errors: event.errors }, status: :bad_request
     end
+  end
+
+  def trigger
+    @trigger ||= EventTrigger.find_by_trigger_name(event_params[:trigger_name])
   end
 
   def event_params
