@@ -40,12 +40,12 @@ RSpec.describe ApiKey, type: :model do
     it '.decode_message' do
       expect(api_key.rsa_private_key).to receive(
         :private_decrypt).with('RSAMSG')
-      api_key.decode_message('RSAMSG')
+      api_key.decode_message(Base64.encode64('RSAMSG'))
     end
 
     it '.encode_message' do
       expect(api_key.rsa_public_key).to receive(
-        :public_encrypt).with('RSAMSG')
+        :public_encrypt).with('RSAMSG').and_call_original
       api_key.encode_message('RSAMSG')
     end
   end

@@ -11,11 +11,11 @@ class ApiKey < ActiveRecord::Base
     def generate!
       ossl = OpenSSL::PKey::RSA.new 2048
 
-      create!({
+      create!(
         key: SecureRandom.hex(16),
         private_key: ossl.to_s,
         public_key: ossl.public_key.to_s
-      })
+      )
     end
   end
 
@@ -28,11 +28,13 @@ class ApiKey < ActiveRecord::Base
   end
 
   def decode_message(hash)
-    rsa_private_key.private_decrypt(hash)
+    rsa_private_key.private_decrypt(
+      Base64.decode64(hash))
   end
 
   def encode_message(message)
-    rsa_public_key.public_encrypt(message)
+    Base64.encode64(
+      rsa_public_key.public_encrypt(message))
   end
 
   def rsa
