@@ -18,4 +18,24 @@ class ApiKey < ActiveRecord::Base
       })
     end
   end
+
+  def rsa_private_key
+    @rsa_private_key ||= rsa.new(private_key)
+  end
+
+  def rsa_public_key
+    @rsa_public_key ||= rsa.new(public_key)
+  end
+
+  def decode_message(hash)
+    rsa_private_key.private_decrypt(hash)
+  end
+
+  def encode_message(message)
+    rsa_public_key.public_encrypt(message)
+  end
+
+  def rsa
+    OpenSSL::PKey::RSA
+  end
 end
