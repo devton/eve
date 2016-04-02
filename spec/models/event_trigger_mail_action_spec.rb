@@ -8,6 +8,7 @@ RSpec.describe EventTriggerMailAction, type: :model do
 
     it { should validate_presence_of(:event_trigger) }
     it { should validate_presence_of(:mail_message) }
+    it { should validate_uniqueness_of(:step).scoped_to(:event_trigger_id) }
     it { should belong_to(:event_trigger) }
     it { should belong_to(:mail_message) }
   end
