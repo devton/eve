@@ -11,7 +11,7 @@
     </head>
     <body>
 
-        <%- if controller_name != 'devise' %>
+        <%- if !devise_controller? %>
             <div id="sidedrawer" class="mui--no-user-select mui--z1">
                 <%= render 'shared/main_sidebar' %>
             </div>

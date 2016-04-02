@@ -8,6 +8,6 @@
   - @mail_messages.each do |resource|
     .mui-row
       .mui-panel.without-margin
-        span= link_to resource.label, [:edit, resource]
+        span= link_to resource.label, resource
 
   = paginate @mail_messages

@@ -1,4 +1,4 @@
-.mui-container-fluid
+.mui-container
   .mui-row
     .mui-col-xs-6
       h1 Event triggers
@@ -8,6 +8,6 @@
   - @event_triggers.each do |resource|
     .mui-row
       .mui-panel.without-margin
-        span= link_to resource.trigger_name, [:edit, resource]
+        span= link_to resource.trigger_name, resource
 
   = paginate @event_triggers
