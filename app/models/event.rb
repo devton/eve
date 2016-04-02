@@ -26,6 +26,27 @@ class Event < ActiveRecord::Base
     }
   end
 
+  # return the next mail action to exected
+  # based on the last executed actions
+  def next_step
+    if executed_actions.present?
+      step_actions.where(
+        'step > ?',
+        last_exec_action.event_trigger_mail_action.step
+      ).first
+    else
+      step_actions.first
+    end
+  end
+
+  def step_actions
+    @step_actions ||= event_trigger.mail_actions.step_order
+  end
+
+  def last_exec_action
+    executed_actions.order(created_at: :desc).first
+  end
+
   private
 
   def validate_metadata_format
