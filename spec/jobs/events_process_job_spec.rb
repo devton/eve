@@ -24,24 +24,29 @@ RSpec.describe EventsProcessJob, type: :job do
   end
 
   let(:event_trigger) { create(:event_trigger) }
-  let(:event) { create(:event, event_trigger: event_trigger, metadata: e_metadata) }
-  let(:mail_action) { create(:event_trigger_mail_action, event_trigger: event_trigger)}
+  let(:event) { create(
+    :event, event_trigger: event_trigger, metadata: e_metadata) }
+  let(:mail_action) { create(
+    :event_trigger_mail_action, event_trigger: event_trigger, step: 1)}
+  let(:mail_action_2) { create(
+    :event_trigger_mail_action, event_trigger: event_trigger, step: 2)}
 
   before do
     mail_action
   end
 
-  it do
+  it 'should process over all steps o queue' do
     expect(event.executed_actions).to be_empty
     expect(ActionMailer::Base.deliveries).to be_empty
+    expect(MailActionNotifier).to receive(
+      :deliver).and_call_original
+    expect(EventsProcessJob).to receive(
+      :perform_later).at_least(2).times.and_call_original
 
-    assert_performed_with(
-      job: EventsProcessJob,
-      args: [event.id],
-      queue: 'default'
-    ) do
+    perform_enqueued_jobs do
       EventsProcessJob.perform_later(event.id)
     end
+    assert_performed_jobs 2
 
     expect(ActionMailer::Base.deliveries).not_to be_empty
 
@@ -49,8 +54,8 @@ RSpec.describe EventsProcessJob, type: :job do
     expect(email.to).to eq([e_metadata[:to]])
     expect(email.from).to eq([e_metadata[:from]])
     expect(email.reply_to).to eq([e_metadata[:reply_to]])
-    expect(email.subject.to_s).to eq("welcome foo bar")
-    expect(email.body.to_s).to eq("hello foo bar body of street lorem")
+    expect(email.subject.to_s).to eq('welcome foo bar')
+    expect(email.body.to_s).to eq('hello foo bar body of street lorem')
     expect(event.executed_actions.reload).not_to be_empty
   end
 end
