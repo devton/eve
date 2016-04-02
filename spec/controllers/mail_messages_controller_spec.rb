@@ -1,54 +1,53 @@
 require 'rails_helper'
 
 RSpec.describe MailMessagesController, type: :controller do
+  let(:user) { create(:user) }
+  let(:mail_message) { create(:mail_message) }
 
-  describe "GET #index" do
-    it "returns http success" do
+  before do
+    sign_in user
+  end
+
+  describe 'GET #index' do
+    it 'returns http success' do
       get :index
       expect(response).to have_http_status(:success)
     end
   end
 
-  describe "GET #new" do
-    it "returns http success" do
+  describe 'GET #new' do
+    it 'returns http success' do
       get :new
       expect(response).to have_http_status(:success)
     end
   end
 
-  describe "GET #edit" do
-    it "returns http success" do
-      get :edit
+  describe 'GET #show' do
+    it 'returns http success' do
+      get :show, id: mail_message.id
       expect(response).to have_http_status(:success)
     end
   end
 
-  describe "GET #create" do
-    it "returns http success" do
-      get :create
+  describe 'GET #edit' do
+    it 'returns http success' do
+      get :edit, id: mail_message.id
       expect(response).to have_http_status(:success)
     end
   end
 
-  describe "GET #update" do
-    it "returns http success" do
-      get :update
-      expect(response).to have_http_status(:success)
+  describe 'POST #create' do
+    it 'returns http success' do
+      post :create, mail_message: {
+        label: 'label_t', subject: 'test', body: 'btest' }
+      expect(response).to have_http_status(:redirect)
     end
   end
 
-  describe "GET #remove" do
-    it "returns http success" do
-      get :remove
-      expect(response).to have_http_status(:success)
+  describe 'PUT #update' do
+    it 'returns http success' do
+      put :update, id: mail_message.id, mail_message: { label: 'foo' }
+      expect(response).to have_http_status(:redirect)
     end
   end
-
-  describe "GET #destroy" do
-    it "returns http success" do
-      get :destroy
-      expect(response).to have_http_status(:success)
-    end
-  end
-
 end
