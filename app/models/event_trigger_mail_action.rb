@@ -3,6 +3,7 @@
 class EventTriggerMailAction < ActiveRecord::Base
   belongs_to :event_trigger
   belongs_to :mail_message
+  has_one :action_condition, class_name: 'MailActionCondition'
 
   validates :event_trigger, :mail_message, :step, presence: true
   validates :step, uniqueness: { scope: %i( event_trigger_id ) }

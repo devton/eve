@@ -4,18 +4,26 @@ class EventsProcessJob < ActiveJob::Base
 
   def perform(event_id)
     e = Event.find event_id
-    last_exec_date = e.last_exec_action.try(:created_at) || e.created_at
+    last_exec_date = e.last_cond_ok_exec_action.try(:created_at) || e.created_at
     step = e.next_step
 
     if step
-      should_exec_at = last_exec_date + step.exec_after.seconds
+      should_exec_at = last_exec_date + step.exec_after.minutes
 
       if DateTime.now > should_exec_at
         unless e.executed_actions.where(
           event_trigger_mail_action_id: step.id).exists?
-          MailActionNotifier.deliver(e, step).deliver_now
-          e.executed_actions.create(
-            event_trigger_mail_action: step)
+
+          ex_action = e.executed_actions.new(event_trigger_mail_action: step)
+
+          if step.action_condition.present?
+            ex_action.cond = step.action_condition.attributes
+            ex_action.cond_ok = step.action_condition.data_satisfy?(e.metadata)
+          end
+
+          ex_action.save!
+
+          MailActionNotifier.deliver(e, step).deliver_now if ex_action.cond_ok
           EventsProcessJob.perform_later(e.id)
         end
       else

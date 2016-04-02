@@ -47,6 +47,10 @@ class Event < ActiveRecord::Base
     executed_actions.order(created_at: :desc).first
   end
 
+  def last_cond_ok_exec_action
+    executed_actions.only_ok.order(created_at: :desc).first
+  end
+
   private
 
   def validate_metadata_format
