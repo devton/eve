@@ -10,7 +10,7 @@ RSpec.describe EventTriggerMailAction, type: :model do
     it { should validate_presence_of(:mail_message) }
     it { should belong_to(:event_trigger) }
     it { should belong_to(:mail_message) }
-    it { should validate_length_of(:exec_after)
-      .is_at_least(0) }
+    it { should have_one(:action_condition) }
+    it { should validate_length_of(:exec_after).is_at_least(0) }
   end
 end
