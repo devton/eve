@@ -74,6 +74,8 @@ GEM
     json (1.8.3)
     json-schema (2.6.1)
       addressable (~> 2.3.8)
+    jsonpath (0.5.8)
+      multi_json
     kaminari (0.16.3)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
@@ -277,6 +279,7 @@ DEPENDENCIES
   factory_girl_rails
   jbuilder (~> 2.0)
   json-schema
+  jsonpath
   kaminari
   letter_opener
   liquid (~> 4.0.0.rc2)
