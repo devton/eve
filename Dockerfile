@@ -26,6 +26,7 @@ RUN \
 
 ENV APP_HOME /eve
 RUN mkdir $APP_HOME
+
 WORKDIR $APP_HOME
 
 ADD Gemfile* $APP_HOME/
@@ -34,3 +35,7 @@ RUN bundle install
 ONBUILD ADD . $APP_HOME
 ONBUILD RUN rake bower:install
 ONBUILD RUN rake assets:precompile
+
+EXPOSE 8080
+
+CMD ["bash"]

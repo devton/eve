@@ -4,13 +4,28 @@ services:
     image: postgres:9.4.1
     ports:
       - "5432:5432"
-
+  
+  redis:
+    image: redis
+  
   web:
     build: .
-    command: bin/rails server --port 3000 --binding 0.0.0.0
+    command: bundle exec unicorn -E production -c config/unicorn.rb
+    environment:
+      RAILS_ENV: production
     ports:
-      - "3000:3000"
-    links:
+      - "3000:8080"
+    depends_on:
       - db
+      - redis
     volumes:
       - .:/myapp
+  
+  worker:
+    build: .
+    command: bundle exec sidekiq -e production -c 2
+    environment:
+      RAILS_ENV: production
+    depends_on:
+      - db
+      - redis
