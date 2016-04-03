@@ -5,5 +5,6 @@ Gridhook.configure do |config|
   config.event_processor = proc do |event|
     # event is a Gridhook::Event object
     # EmailEvent.create! event.attributes
+    config.event_processor = SendgridProcessor.new
   end
 end
