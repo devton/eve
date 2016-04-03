@@ -24,6 +24,8 @@ RUN \
   npm install -g npm && \
   echo '\n# Node.js\nexport PATH="node_modules/.bin:$PATH"' >> /root/.bashrc
 
+RUN npm install -g bower
+
 ENV APP_HOME /eve
 RUN mkdir $APP_HOME
 
@@ -32,10 +34,6 @@ WORKDIR $APP_HOME
 ADD Gemfile* $APP_HOME/
 RUN bundle install
 
-ONBUILD ADD . $APP_HOME
-ONBUILD RUN rake bower:install
-ONBUILD RUN rake assets:precompile
-
-EXPOSE 8080
-
-CMD ["bash"]
+ADD . $APP_HOME
+RUN rake bower:install['--allow-root']
+RUN rake assets:precompile

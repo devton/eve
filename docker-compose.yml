@@ -9,10 +9,10 @@ services:
   web:
     build: .
     command: bundle exec unicorn -E production -c /eve/config/unicorn.rb
-    environment:
-      RAILS_ENV: production
     ports:
       - "3000:8080"
+    env_file:
+      - .env.production
     depends_on:
       - db
       - redis
@@ -22,8 +22,8 @@ services:
   worker:
     build: .
     command: bundle exec sidekiq -e production -c 2
-    environment:
-      RAILS_ENV: production
+    env_file:
+      - .env.production
     depends_on:
       - db
       - redis
