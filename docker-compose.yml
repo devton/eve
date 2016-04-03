@@ -2,10 +2,9 @@ version: '2'
 services:
   db:
     image: postgres:9.4.1
-  
   redis:
     image: redis
-  
+
   web:
     build: .
     command: bundle exec unicorn -E production -c /eve/config/unicorn.rb
@@ -21,6 +20,8 @@ services:
   
   worker:
     build: .
+    volumes:
+      - .:/myapp
     command: bundle exec sidekiq -e production -c 2
     env_file:
       - .env.production
