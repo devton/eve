@@ -23,7 +23,7 @@ class EventsProcessJob < ActiveJob::Base
 
           ex_action.save!
 
-          MailActionNotifier.deliver(e, step).deliver_now if ex_action.cond_ok
+          MailActionNotifier.deliver(ex_action, step).deliver_now if ex_action.cond_ok
           EventsProcessJob.perform_later(e.id)
         end
       else
