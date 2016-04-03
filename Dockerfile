@@ -36,4 +36,4 @@ RUN bundle install
 
 ADD . $APP_HOME
 RUN rake bower:install['--allow-root']
-RUN rake assets:precompile
+RUN RAILS_ENV=production rake assets:precompile
