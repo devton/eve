@@ -2,15 +2,13 @@ version: '2'
 services:
   db:
     image: postgres:9.4.1
-    ports:
-      - "5432:5432"
   
   redis:
     image: redis
   
   web:
     build: .
-    command: bundle exec unicorn -E production -c config/unicorn.rb
+    command: bundle exec unicorn -E production -c /eve/config/unicorn.rb
     environment:
       RAILS_ENV: production
     ports:
