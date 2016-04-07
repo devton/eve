@@ -1,7 +1,7 @@
 namespace :demo do
   desc 'create demo user demo@demo.com/demo123'
   task demo_user: :environment do
-    puts 'creating demo@demo.com with password demo123'
+    puts 'creating demo@demo.com with password demo1234'
     User.create!(email: 'demo@demo.com', password: 'demo1234', password_confirmation: 'demo1234')
     puts 'created'
   end
