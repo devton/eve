@@ -1,37 +1,47 @@
-<div class="mui-container">
-    <div class="mui-row">
-        <div class="mui-col-md-4"></div>
-        <div class="mui-col-xs-12 mui-col-md-4">
-            <h1 class="mui--text-center">sign in</h1>
-            <div class="mui-panel">
-                <p class="mui--text-center mui--text-danger"><%= alert %></p>
+<style>
+ body {
+     background-color: #DADADA;
+ }
+ body > .grid {
+     height: 100%;
+ }
+ .image {
+     margin-top: -100px;
+ }
+ .column {
+     max-width: 450px;
+ }
+</style>
+<div class="ui middle aligned center aligned grid">
+    <div class="column">
+        <h1 class="ui teal image header">sign in</h1>
 
-                <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: ''}) do |f| %>
-                    <div class="mui-textfield">
-                        <%= f.label :email %><br />
-                        <%= f.email_field :email, autocomplete: "off", autofocus: true, class: 'pure-input-1' %>
-                    </div>
+        <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: 'ui large form'}) do |f| %>
+            <div class="ui stacked segment">
+                <div class="field">
+                    <%#= f.label :email %><br />
+                    <%= f.email_field :email, autocomplete: "off", autofocus: true, class: 'pure-input-1' %>
+                </div>
+                <div class="field">
+                    <%#= f.label :password %><br />
+                    <%= f.password_field :password, autocomplete: "off", class: 'pure-input-1' %>
+                </div>
 
-                    <div class="mui-textfield">
-                        <%= f.label :password %><br />
-                        <%= f.password_field :password, autocomplete: "off", class: 'pure-input-1' %>
-                    </div>
-
-                    <% if devise_mapping.rememberable? -%>
-                        <div class="mui-textfield">
-                            <%= f.check_box :remember_me %>
-                            <%= f.label :remember_me %>
-                        </div>
-                    <% end -%>
-
-                    <div class="mui--text-center">
-                        <%= f.submit "log in", class: 'mui-btn mui-btn--small mui-btn--primary' %>
-                    </div>
-                <% end %>
+                <%= f.submit "log in", class: 'ui fluid large teal submit button' %>
             </div>
-            <div class="mui--text-right">
-                <%= render "devise/shared/links" %>
-            </div>
+
+            <% if false and devise_mapping.rememberable? -%>
+                <div class="mui-textfield">
+                    <%= f.check_box :remember_me %>
+                    <%= f.label :remember_me %>
+                </div>
+            <% end -%>
+        <% end %>
+        <% if alert %>
+            <p class="ui error message"><%= alert %></p>
+        <% end %>
+        <div class="ui message">
+            <%= render "devise/shared/links" %>
         </div>
     </div
 </div>

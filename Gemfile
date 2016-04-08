@@ -37,6 +37,9 @@ gem 'parallel'
 gem 'jsonpath'
 gem 'unicorn'
 gem 'gridhook'
+gem 'therubyracer'
+gem 'less-rails-semantic_ui'
+gem 'autoprefixer-rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
