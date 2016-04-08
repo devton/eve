@@ -1,13 +1,25 @@
-.mui-container-fluid
-  .mui-row
-    .mui-col-xs-6
-      h1 Email templates
-    .mui-col-xs-6
-      .mui--pull-right
-        = paginate @mail_messages
-  - @mail_messages.each do |resource|
-    .mui-row
-      .mui-panel.without-margin
-        span= link_to resource.label, resource
+.ui.main.text.container
+  h1.ui.header Email templates
 
-  = paginate @mail_messages
+  .ui.pointing.menu
+    = link_to 'All', mail_messages_path, class: 'active item'
+    = link_to 'New template', new_mail_message_path, class: 'item'
+    .right.menu
+      .item
+        .ui.transparent.icon.input
+          input[type="text" placeholder="Search..."]
+          i[class="search link icon"]
+
+  table.ui.celled.table
+    thead
+      tr
+        th label
+    tbody
+      - @mail_messages.each do |resource|
+        tr
+          td
+            span= link_to resource.label, resource
+    tfoot
+      tr
+        th
+          = paginate @mail_messages

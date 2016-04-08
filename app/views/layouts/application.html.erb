@@ -12,20 +12,13 @@
     <body>
 
         <%- if !devise_controller? %>
-            <div id="sidedrawer" class="mui--no-user-select mui--z1">
-                <%= render 'shared/main_sidebar' %>
-            </div>
-            <header id="header">
-                <div class="mui-appbar mui--appbar-line-height">
-                    <div class="mui-container-fluid">
-                        <a class="sidedrawer-toggle mui--visible-xs-inline-block js-show-sidedrawer">☰</a>
-                        <a class="sidedrawer-toggle mui--hidden-xs js-hide-sidedrawer">☰</a>
-                        <span class="mui--text-title mui--visible-xs-inline-block">Brand.io</span>
-                    </div>
+            <div class="ui fixed inverted menu">
+                <div class="ui container">
+                    <%= link_to 'EVE', root_path, class: 'header item' %>
+                    <%= render 'shared/main_sidebar' %>
                 </div>
-            </header>
-            <div id="content-wrapper">
-                <div class="mui--appbar-height"></div>
+            </div>
+            <div class="ui main text container">
                 <%= yield %>
             </div>
         <%- else %>
