@@ -1,8 +1,8 @@
 = simple_form_for @mail_message do |f|
   = f.error_notification
 
-  = f.input :label
-  = f.input :subject
+  = f.input :label, as: :string
+  = f.input :subject, input_html: { rows: 2 }
   = f.input :body
 
   = f.button :submit

@@ -1,4 +1,17 @@
-.mui-container-fluid
-  h1 Dashboard#index
+.ui.main.text.container
+  h1.ui.header Dashboard#index
   p Find me in app/views/dashboard/index.html.slim
   = link_to 'logout', destroy_user_session_path
+
+  .ui.feed
+    - @events.each do |e|
+      .event
+        .label h
+        .content
+          .date
+            = distance_of_time_in_words_to_now e.created_at
+          .summary
+            .user
+              = e.to
+            | &nbsp;
+            = e.trigger_name

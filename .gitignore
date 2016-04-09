@@ -57,3 +57,4 @@ bower.json
 .env.local
 .env.test
 .env.production
+/lib/tasks/ctrse.rake
