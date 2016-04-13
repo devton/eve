@@ -10,4 +10,10 @@ class EventTrigger < ActiveRecord::Base
   def to_s
     trigger_name
   end
+
+  def self.trigger_titles
+    all.pluck(:trigger_name).map do |x|
+      { title: x }
+    end
+  end
 end

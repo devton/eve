@@ -5,22 +5,40 @@ css:
   }
 
 .ui.main.text.container.with-3d-shadow.with-transitions
-  h1.ui.header Event triggers
+
+  h2.ui.header
+    i.puzzle.icon
+    .content
+      | Event triggers
+      .sub.header Manage all trigger actions
+
+  br/
+  .ui.secondary.menu
+    = link_to 'All', event_triggers_path, class: 'active item'
+    = link_to 'New trigger', new_event_trigger_path, class: 'item'
+    .right.menu
+      .item
+        #event_trigger_search.ui.icon.input.search[data-evnames=EventTrigger.trigger_titles.to_json]
+          input[type="text" class="prompt" placeholder="Search..."]
+          i[class="search link icon"]
+  br/
+
+
 
   - @event_triggers.each do |resource|
     .ui.segments
       .ui.segment
         .ui.grid
           .ten.wide.column
-            p= link_to resource['trigger_name'], event_trigger_path(resource['event_trigger_id'])
+            .ui.ribbon.label
+              = resource['trigger_name']
           .six.wide.column
             .ui.mini.buttons.right.floated
               = link_to event_trigger_path(resource['event_trigger_id']), class: 'ui button' do
                 i.small.heartbeat.icon
               = link_to edit_event_trigger_path(resource['event_trigger_id']), class: 'ui button' do
                 i.small.edit.icon
-      - if resource.last_activity.present?
-        .ui.segment
+        - if resource.last_activity.present?
           svg.chart-data[id="chart-#{resource['event_trigger_id']}"data-activity=resource.last_activity.data.to_json]
 
 
