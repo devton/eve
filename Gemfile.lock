@@ -122,6 +122,7 @@ GEM
     multi_json (1.11.2)
     nokogiri (1.6.7.2)
       mini_portile2 (~> 2.0.0.rc2)
+    novus-nvd3-rails (1.8.2)
     orm_adapter (0.5.0)
     parallel (1.6.2)
     pg (0.18.4)
@@ -317,6 +318,7 @@ DEPENDENCIES
   less-rails-semantic_ui
   letter_opener
   liquid (~> 4.0.0.rc2)
+  novus-nvd3-rails
   parallel
   pg (~> 0.15)
   pry

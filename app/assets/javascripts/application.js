@@ -15,4 +15,7 @@
 // *********************************
 //= require jquery
 //= require semantic_ui/semantic_ui
+//= require d3.v3
+//= require nv.d3
 //= require_self
+//= require_tree .

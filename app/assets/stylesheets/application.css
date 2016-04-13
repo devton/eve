@@ -12,6 +12,7 @@
  *
  *= require_tree .
  *= require semantic_ui/semantic_ui
+ *= require nv.d3
  *= require_self
  */
 
