@@ -1,13 +1,27 @@
-.mui-container
-  .mui-row
-    .mui-col-xs-6
-      h1 Event triggers
-    .mui-col-xs-6
-      .mui--pull-right
-        = paginate @event_triggers
+css:
+  sgv {
+    display: block;
+    width: 100%;
+  }
+
+.ui.main.text.container.with-3d-shadow.with-transitions
+  h1.ui.header Event triggers
+
   - @event_triggers.each do |resource|
-    .mui-row
-      .mui-panel.without-margin
-        span= link_to resource.trigger_name, resource
+    .ui.segments
+      .ui.segment
+        .ui.grid
+          .ten.wide.column
+            p= link_to resource['trigger_name'], event_trigger_path(resource['event_trigger_id'])
+          .six.wide.column
+            .ui.mini.buttons.right.floated
+              = link_to event_trigger_path(resource['event_trigger_id']), class: 'ui button' do
+                i.small.heartbeat.icon
+              = link_to edit_event_trigger_path(resource['event_trigger_id']), class: 'ui button' do
+                i.small.edit.icon
+      - if resource.last_activity.present?
+        .ui.segment
+          svg.chart-data[id="chart-#{resource['event_trigger_id']}"data-activity=resource.last_activity.data.to_json]
+
 
   = paginate @event_triggers
