@@ -1,7 +1,7 @@
 class EventTriggersController < ApplicationController
   respond_to :html
   def index
-    @event_triggers = EventTrigger.order(created_at: :desc).page(params[:page])
+    @event_triggers = EventTriggerCatalog.page(params[:page])
     respond_with @event_triggers
   end
 
