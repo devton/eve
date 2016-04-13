@@ -17,5 +17,6 @@
 //= require semantic_ui/semantic_ui
 //= require d3.v3
 //= require nv.d3
+//= require turbolinks 
 //= require_self
 //= require_tree .
