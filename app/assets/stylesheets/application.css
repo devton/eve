@@ -18,7 +18,7 @@
 
 
 body {
-  background-color: #FFFFFF;
+  background-color: #f9f9f9;
 }
 .ui.menu .item img.logo {
   margin-right: 1.5em;
@@ -37,4 +37,8 @@ body {
 .turbolinks-progress-bar {
   height: 15px;
   background-color: #AEEA00;
+}
+
+.herop-header {
+    background: #7d7fba !important;
 }

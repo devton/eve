@@ -4,26 +4,26 @@ css:
     width: 100%;
   }
 
-.ui.main.text.container.with-3d-shadow.with-transitions
 
-  h2.ui.header
-    i.puzzle.icon
-    .content
-      | Event triggers
-      .sub.header Manage all trigger actions
+.ui.inverted.vertical.center.aligned.segment.herop-header
+  .ui.text.main.container[style="margin-bottom: 1em; margin-top: 4em;"]
+    h1.ui.header.inverted
+      /i.puzzle.icon.circular
+      .content
+        | Event triggers
+        .sub.header Create and analyze triggered actions for incomming events
 
-  br/
-  .ui.secondary.menu
-    = link_to 'All', event_triggers_path, class: 'active item'
-    = link_to 'New trigger', new_event_trigger_path, class: 'item'
+
+.ui.main.text.container.with-3d-shadow.with-transitions[style="margin-top: 2em;"]
+  .ui.secondary.menu[style="margin-bottom: 2em;"]
+    = link_to new_event_trigger_path, class: 'ui compact labeled icon button olive' do
+      i.icon.plus
+      | new trigger
     .right.menu
       .item
         #event_trigger_search.ui.icon.input.search[data-evnames=EventTrigger.trigger_titles.to_json]
           input[type="text" class="prompt" placeholder="Search..."]
           i[class="search link icon"]
-  br/
-
-
 
   - @event_triggers.each do |resource|
     .ui.segments

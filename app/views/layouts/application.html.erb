@@ -12,15 +12,13 @@
     <body>
 
         <%- if !devise_controller? %>
-            <div class="ui fixed inverted menu">
+            <div class="ui fixed stacked menu">
                 <div class="ui container">
                     <%= link_to 'EVE', root_path, class: 'header item' %>
                     <%= render 'shared/main_sidebar' %>
                 </div>
             </div>
-            <div class="ui main text container">
-                <%= yield %>
-            </div>
+            <%= yield %>
         <%- else %>
             <%= yield %>
         <%- end %>
