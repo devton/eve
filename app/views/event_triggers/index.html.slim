@@ -21,23 +21,25 @@ css:
       | new trigger
     .right.menu
       .item
-        #event_trigger_search.ui.icon.input.search[data-evnames=EventTrigger.trigger_titles.to_json]
-          input[type="text" class="prompt" placeholder="Search..."]
+        form#event_trigger_search.ui.icon.input.search[data-evnames=EventTrigger.trigger_titles.to_json action=event_triggers_path(params) method='get']
+          input[type="text" class="prompt" placeholder="Search..." name="search" value=params[:search]]
           i[class="search link icon"]
 
   - @event_triggers.each do |resource|
-    .ui.segments
+    .ui.segments[style='margin: 2em 0']
       .ui.segment
         .ui.grid
           .ten.wide.column
-            .ui.ribbon.label
+            .ui.ribbon.label.large
               = resource['trigger_name']
           .six.wide.column
-            .ui.mini.buttons.right.floated
-              = link_to event_trigger_path(resource['event_trigger_id']), class: 'ui button' do
-                i.small.heartbeat.icon
-              = link_to edit_event_trigger_path(resource['event_trigger_id']), class: 'ui button' do
-                i.small.edit.icon
+            .ui.buttons.right.floated.icon
+              = link_to event_trigger_path(resource['event_trigger_id']), class: 'ui button icon' do
+                i.pie.chart.icon
+              = link_to event_trigger_path(resource['event_trigger_id']), class: 'ui button icon' do
+                i.heartbeat.icon
+              = link_to edit_event_trigger_path(resource['event_trigger_id']), class: 'ui button icon' do
+                i.edit.icon
         - if resource.last_activity.present?
           svg.chart-data[id="chart-#{resource['event_trigger_id']}"data-activity=resource.last_activity.data.to_json]
 

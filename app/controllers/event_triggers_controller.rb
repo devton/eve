@@ -1,12 +1,16 @@
 class EventTriggersController < ApplicationController
   respond_to :html
+  has_scope :search
+
   def index
-    @event_triggers = EventTriggerCatalog.page(params[:page])
+    @event_triggers = apply_scopes(EventTriggerCatalog).all.page(params[:page])
     respond_with @event_triggers
   end
 
   def show
     @event_trigger = EventTrigger.find params[:id]
+    @event_trigger_catalog = EventTriggerCatalog.find_by_event_trigger_id params[:id]
+
     @event_trigger.mail_actions.build unless @event_trigger.mail_actions.present?
     respond_with @event_trigger
   end
