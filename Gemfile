@@ -42,6 +42,8 @@ gem 'less-rails-semantic_ui'
 gem 'autoprefixer-rails'
 gem 'novus-nvd3-rails'
 gem 'turbolinks', '~> 5.0.0.beta'
+gem 'pg_search'
+gem 'has_scope'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
