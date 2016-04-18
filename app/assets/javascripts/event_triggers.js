@@ -11,19 +11,19 @@ document.addEventListener("turbolinks:load", function() {
             chart;
 
         nv.addGraph(function() {
-            var chart = nv.models.multiBarChart()
+            var chart = nv.models.stackedAreaChart()
                     .x(function(d) { return d[0] })
                     .y(function(d) { return d[1] })
                     .clipEdge(true)
                     .useInteractiveGuideline(true)
                     .showControls(false)
-                 		.showYAxis(false)
+                    .showYAxis(false)
                     .width(650)
-                    .stacked(true)
+                    .height(170)
                     .showLegend(false)
             ;
 
-           chart.color(d3.scale.category20b().range());
+            chart.color(d3.scale.category20b().range());
 
             chart.xAxis
                 .showMaxMin(false)
