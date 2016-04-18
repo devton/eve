@@ -15,16 +15,13 @@ class MailMessage < ActiveRecord::Base
   # handles with template parse for message
   # attributes should be in format:
   # attrs = {
-  #   subject_data: {
-  #     'var1' => 'ipsum'
-  #   },
-  #   body_data: {
+  #   user: {
   #     'var1' => 'lorem'
   #   }
   # }
   def parse(attrs)
-    parse_subject(attrs.delete(:subject_data))
-    parse_body(attrs.delete(:body_data))
+    parse_subject(attrs)
+    parse_body(attrs)
   end
 
   # parse subject_template with given attributes

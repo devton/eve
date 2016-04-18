@@ -7,8 +7,9 @@ class Api::IncomingEventsController < ApplicationController
   # Handles with creation of events
   # Request body in json format:
   # {
-  #   trigger_name: 'tr_name',
-  #   to: 'to@email.com',
+  #   event_name: 'tr_name',
+  #   session_id: '1234',
+  #   email: 'to@email.com',
   #   from: 'from@email.com',
   #   reply_to: 'reply@email.com',
   #   subject_data: { user: { name: 'foor' } },
@@ -43,7 +44,7 @@ class Api::IncomingEventsController < ApplicationController
   end
 
   def trigger
-    @trigger ||= EventTrigger.find_by_trigger_name(event_data[:trigger_name])
+    @trigger ||= EventTrigger.find_by_trigger_name(event_data[:event_name])
   end
 
   def event_data

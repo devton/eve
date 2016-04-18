@@ -9,17 +9,10 @@ RSpec.describe MailMessage, type: :model do
   end
   let(:parse_attrs) do
     {
-      subject_data: {
-        user: {
-          name: 'ipsum'
-        }
-      },
-      body_data: {
-        user: {
-          name: 'lorem',
-          address: {
-            street: 'foo bar'
-          }
+      user: {
+        name: 'ipsum',
+        address: {
+          street: 'foo bar'
         }
       }
     }
@@ -57,7 +50,7 @@ RSpec.describe MailMessage, type: :model do
   describe '.parse_subject' do
     context 'parse wit all variables' do
       before do
-        mail_message.parse_subject(parse_attrs.delete(:subject_data))
+        mail_message.parse_subject(parse_attrs)
       end
 
       it 'should parsed_subject filled' do
@@ -87,11 +80,11 @@ RSpec.describe MailMessage, type: :model do
   describe '.parse_body' do
     context 'parse wit all variables' do
       before do
-        mail_message.parse_body(parse_attrs.delete(:body_data))
+        mail_message.parse_body(parse_attrs)
       end
 
       it 'should parsed_body filled' do
-        expect(mail_message.parsed_body).to eq('hello lorem more nested foo bar')
+        expect(mail_message.parsed_body).to eq('hello ipsum more nested foo bar')
       end
 
       it 'should have no errors' do

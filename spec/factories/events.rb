@@ -3,16 +3,12 @@ FactoryGirl.define do
     event_trigger
     metadata do
       {
-        trigger_name: 'trigger',
-        to: 'example@email.com',
+        event_name: 'trigger',
+        email: 'example@email.com',
+        session_id: 'XkDf',
         from: 'system@example.com',
         reply_to: 'lorem@lorem.com',
-        subject_data: {
-          user: {
-            name: 'Foo name'
-          }
-        },
-        body_data: {
+        data: {
           user: {
             name: 'Foo name'
           }

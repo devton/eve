@@ -10,14 +10,10 @@ RSpec.describe Api::IncomingEventsController, type: :controller do
   end
   let(:event_body) do
     {
-      trigger_name: event_trigger.trigger_name,
-      to: 'test@test.com',
-      subject_data: {
-        user: { name: 'foo' }
-      },
-      body_data: {
-        user: { name: 'foo body' }
-      }
+      event_name: event_trigger.trigger_name,
+      session_id: '1234',
+      email: 'test@test.com',
+      user: { name: 'foo' }
     }
   end
   let(:post_body) do
@@ -36,7 +32,7 @@ RSpec.describe Api::IncomingEventsController, type: :controller do
     end
 
     it 'returns http not_found when pass invalid trigger name' do
-      event_body.update(trigger_name: 'invalid')
+      event_body.update(event_name: 'invalid')
       post :create, post_body, format: :json
       expect(response).to have_http_status(:not_found)
     end
@@ -55,7 +51,7 @@ RSpec.describe Api::IncomingEventsController, type: :controller do
 
 
     it 'returns http bad_request when missing some required attribute' do
-      event_body.delete(:to)
+      event_body.delete(:session_id)
       post :create, post_body, format: :json
       expect(response).to have_http_status(:bad_request)
     end

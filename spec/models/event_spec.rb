@@ -6,22 +6,24 @@ RSpec.describe Event, type: :model do
   describe 'validations' do
     before { event }
 
-    it { should validate_presence_of(:event_trigger) }
+    it { should validate_presence_of(:event_name) }
+    it { should validate_presence_of(:session_id) }
     it { should validate_presence_of(:metadata) }
     it { should belong_to(:event_trigger) }
     it { should have_many(:executed_actions) }
 
     it do
       should allow_value({
-        trigger_name: 'foo_bar',
-        to: 'example@example.com'
+        event_name: 'foo_bar',
+        session_id: 'AbCD',
+        email: 'example@example.com'
       }).for(:metadata)
     end
 
     it do
       should_not allow_value({
         trigger_name: 'foo_bar'
-      }, {}, {to: 'foo@foo.com'}).for(:metadata)
+      }, {}, {email: 'foo@foo.com'}).for(:metadata)
     end
   end
 

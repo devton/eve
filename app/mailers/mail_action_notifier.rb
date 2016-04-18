@@ -6,7 +6,7 @@ class MailActionNotifier < ApplicationMailer
     configure_xsmtp_headers_for(event_action)
 
     mail(
-      to: event.to,
+      to: event.email,
       from: event.from,
       reply_to: event.reply_to,
       subject: message.parsed_subject,
